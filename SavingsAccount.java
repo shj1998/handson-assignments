@@ -1,48 +1,33 @@
-class SavingsAccount {
-    long accNo;
-    double balance;
-    String name; 
-    String state; 
-    String city;
-    String ifsc;
-    int pin;
-    
-    SavingsAccount(long a, String n, String s, String c){
-        accNo = a;
-        name = n;
-        state = s;
-        city = c;
-        ifsc = "HSBC001";
-        balance = 0.00;
+public class SavingsAccount extends Account {
+    String ifscCode;
+
+    SavingsAccount(long accountNumber, double balance, String ifscCode) {
+        super(accountNumber,balance);
+        //this.accountNumber = accountNumber;
+        //this.balance = balance;
+        this.ifscCode = ifscCode;
+        System.out.println("SavingsAccount(long,double)");
     }
 
-    SavingsAccount(long a, String n, String s, String c, double b){
-        accNo = a;
-        name = n;
-        state = s;
-        city = c;
-        ifsc = "HSBC001";
-        balance = b;
+    void minBalance() {
+        System.out.println("You must have min 5000 balance");
     }
 
-    void deposit(long amt){
-        balance = balance + amt;
-        System.out.println("Deposited Amount = " + amt + " new Balance = " + balance);
-
+    void deposit(double amount){
+        //Deposit to your account
+        this.balance = this.balance + amount;
     }
 
-    void withdraw(long amt){
-        if(amt > balance){
-            System.out.println("Insuficient Funds");
-        }
-        else{
-            balance = balance - amt;
-            System.out.println("Withdrawn Amount = " + amt + " new Balance = " + balance);
-        }
+    /*void deposit(double amount,long accountNumber){
+        System.out.println("deposit(long,double) called");
+    }*/
+    void withdrawLimit(){
+        System.out.println("Withdraw limit in savings is 50000");
     }
-
-    void display(){
-        System.out.println("Name = " + name + ", Account no = " + accNo + " Balance = " + balance +" State = " + state + " City = "+ city + " ifsc code = " + ifsc);
-        System.out.println("-------------------------------");
+    @Override
+    void accountInformation(){
+        super.accountInformation();
+        minBalance();
+        withdrawLimit();    
     }
 }
